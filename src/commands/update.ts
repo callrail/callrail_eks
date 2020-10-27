@@ -40,6 +40,7 @@ export default class Update extends Command {
     } = flags;
 
     const namespace = namespaceFlag || this.getNamespace();
+    const eksConfigLocation = config || this.getEKSConfigLocation()
     const commandString = `helm ssm upgrade ${namespace} ${stack} -f ${config || this.configFileLocation}`;
 
     exec(commandString, (error, stdout, stderr) => {
@@ -68,5 +69,12 @@ export default class Update extends Command {
     } else {
       throw error;
     }
+  }
+
+  private getEKSConfigLocation(): string {
+    const rawData = readFileSync(this.configFileLocation);
+    const parsedData = JSON.parse(rawData.toString());
+    const { config } = parsedData;
+    return config || '~/eks_config.yaml';
   }
 }
