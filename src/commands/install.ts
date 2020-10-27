@@ -5,13 +5,13 @@ import { join } from 'path';
 
 export default class Update extends Command {
 
-  static description: string = 'Updates the callrails eks environment. By default, the whole stack will be updated';
+  static description: string = 'Installs the callrails eks environment.';
   static examples: string[] = [
-    `$ callrail_eks update`,
-    `$ callrail_eks update -b my-branch`,
-    `$ callrail_eks update -s callrail/stack`,
-    `$ callrail_eks update -n my-namespace`,
-    `$ callrail_eks update -c "~/my-custom-yaml.yml"`
+    `$ callrail_eks install`,
+    `$ callrail_eks install -b my-branch`,
+    `$ callrail_eks install -s callrail/stack`,
+    `$ callrail_eks install -n my-namespace`,
+    `$ callrail_eks install -c "~/my-custom-yaml.yml"`
   ];
   static flags = {
     help: flags.help({char: 'h'}),
@@ -41,7 +41,7 @@ export default class Update extends Command {
 
     const namespace = namespaceFlag || this.getNamespace();
     const eksConfigLocation = config || this.getEKSConfigLocation()
-    const commandString = `helm ssm upgrade ${namespace} ${stack} -f ${config || eksConfigLocation}`;
+    const commandString = `helm ssm install ${namespace} ${stack} -f ${config || eksConfigLocation}`;
 
     exec(commandString, (error, stdout, stderr) => {
       if (error) {

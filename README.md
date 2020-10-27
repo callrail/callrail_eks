@@ -28,11 +28,52 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`callrail_eks config-location [CONFIG]`](#callrail_eks-config-location-config)
+* [`callrail_eks delete`](#callrail_eks-delete)
 * [`callrail_eks help [COMMAND]`](#callrail_eks-help-command)
+* [`callrail_eks install`](#callrail_eks-install)
 * [`callrail_eks namespace [NAMESPACE]`](#callrail_eks-namespace-namespace)
 * [`callrail_eks token`](#callrail_eks-token)
 * [`callrail_eks update`](#callrail_eks-update)
 * [`callrail_eks upgrade`](#callrail_eks-upgrade)
+
+## `callrail_eks config-location [CONFIG]`
+
+Sets location of eks yaml config
+
+```
+USAGE
+  $ callrail_eks config-location [CONFIG]
+
+ARGUMENTS
+  CONFIG  Kubernetes configuration
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks config-location my-config
+```
+
+_See code: [src/commands/config-location.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/config-location.ts)_
+
+## `callrail_eks delete`
+
+Deletes the stack along with the stateful sets associated with it
+
+```
+USAGE
+  $ callrail_eks delete
+
+OPTIONS
+  -h, --help                 show CLI help
+  -n, --namespace=namespace
+
+EXAMPLE
+  $callrail_eks delete
+```
+
+_See code: [src/commands/delete.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/delete.ts)_
 
 ## `callrail_eks help [COMMAND]`
 
@@ -50,6 +91,31 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `callrail_eks install`
+
+Installs the callrails eks environment.
+
+```
+USAGE
+  $ callrail_eks install
+
+OPTIONS
+  -b, --branch=branch        [default: master]
+  -c, --config=config
+  -h, --help                 show CLI help
+  -n, --namespace=namespace
+  -s, --stack=stack          [default: callrail/stack]
+
+EXAMPLES
+  $ callrail_eks install
+  $ callrail_eks install -b my-branch
+  $ callrail_eks install -s callrail/stack
+  $ callrail_eks install -n my-namespace
+  $ callrail_eks install -c "~/my-custom-yaml.yml"
+```
+
+_See code: [src/commands/install.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/install.ts)_
 
 ## `callrail_eks namespace [NAMESPACE]`
 
