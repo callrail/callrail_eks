@@ -28,28 +28,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`callrail_eks hello [FILE]`](#callrail_eks-hello-file)
 * [`callrail_eks help [COMMAND]`](#callrail_eks-help-command)
-
-## `callrail_eks hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ callrail_eks hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ callrail_eks hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/hello.ts)_
+* [`callrail_eks namespace [NAMESPACE]`](#callrail_eks-namespace-namespace)
+* [`callrail_eks token`](#callrail_eks-token)
+* [`callrail_eks update`](#callrail_eks-update)
+* [`callrail_eks upgrade`](#callrail_eks-upgrade)
 
 ## `callrail_eks help [COMMAND]`
 
@@ -67,4 +50,83 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `callrail_eks namespace [NAMESPACE]`
+
+Sets current namespace
+
+```
+USAGE
+  $ callrail_eks namespace [NAMESPACE]
+
+ARGUMENTS
+  NAMESPACE  Namespace to use when talking to Kubernetes
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks namespace my-namespace
+```
+
+_See code: [src/commands/namespace.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/namespace.ts)_
+
+## `callrail_eks token`
+
+Prints token needed to log into Kubernetes console
+
+```
+USAGE
+  $ callrail_eks token
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks token
+```
+
+_See code: [src/commands/token.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/token.ts)_
+
+## `callrail_eks update`
+
+Updates the callrails eks environment. By default, the whole stack will be updated
+
+```
+USAGE
+  $ callrail_eks update
+
+OPTIONS
+  -b, --branch=branch        [default: master]
+  -c, --config=config
+  -h, --help                 show CLI help
+  -n, --namespace=namespace
+  -s, --stack=stack          [default: callrail/stack]
+
+EXAMPLES
+  $ callrail_eks update
+  $ callrail_eks update -b my-branch
+  $ callrail_eks update -s callrail/stack
+  $ callrail_eks update -n my-namespace
+  $ callrail_eks update -c "~/my-custom-yaml.yml"
+```
+
+_See code: [src/commands/update.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/update.ts)_
+
+## `callrail_eks upgrade`
+
+Updates helm repo
+
+```
+USAGE
+  $ callrail_eks upgrade
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks upgrade
+```
+
+_See code: [src/commands/upgrade.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/upgrade.ts)_
 <!-- commandsstop -->
