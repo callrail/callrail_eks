@@ -1,0 +1,63 @@
+global:
+  baseDomain: $BASEDOMAN
+
+callrail:
+  chassis:
+    app:
+      config:
+        cache_bust: $CACHEBUST
+        rails_env: development
+        bucket_suffix: stage1
+        swappy_stub_requests: 'false'
+      contexts: {{ssm-path-prefix /configmgmt/}}
+        - bi_warehouse_nonprod1
+        - integrations_sandbox
+        - andriod_sandbox
+        - ios_sandbox
+        - twilio_sandbox
+        - plivo_sandbox
+        - telnyx_sandbox
+        - bandwidth_sandbox
+        - payment_sandbox
+        - zuora_qa
+        - plans_sandbox
+        - qa_tokens
+      {{ end }}
+    image:
+      tag: $CALLRAILTAG
+      repository: 831096501748.dkr.ecr.us-east-1.amazonaws.com/callrail
+rowdy:
+  chassis:
+    app:
+      config:
+        cache_bust: $CACHEBUST
+        rails_env: development
+        bucket_suffix: stage1
+      contexts: {{ssm-path-prefix /configmgmt/}}
+        - twilio_sandbox
+        - plivo_sandbox
+        - telnyx_sandbox
+        - bandwidth_sandbox
+        - qa_tokens
+      {{ end }}
+    image:
+      tag: latest
+swappy:
+  chassis:
+    app:
+      config:
+        cache_bust: $CACHEBUST
+        rails_env: development
+        bucket_suffix: stage1
+      contexts: {{ssm-path-prefix /configmgmt/}}
+        - qa_tokens
+      {{ end }}
+    image:
+      tag: latest
+rabbitmq:
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "500Mi"
+    limits:
+      memory: "500Mi"
