@@ -3,7 +3,7 @@ import { getNamespace, getEKSConfigLocation } from '../helpers/cli-config';
 import { exec } from '../helpers/exec';
 import { writeTemplate } from '../helpers/eks-template';
 
-export default class Update extends Command {
+export default class Install extends Command {
 
   static description: string = 'Installs the callrails eks environment.';
   static examples: string[] = [
@@ -30,7 +30,7 @@ export default class Update extends Command {
   static args = [];
 
   async run() {
-    const { flags } = this.parse(Update);
+    const { flags } = this.parse(Install);
     const {
       branch,
       stack,
