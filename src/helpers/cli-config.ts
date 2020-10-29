@@ -1,13 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { ICLIConfig } from '../models/icliconfig';
 
-const configFileLocation: string =  join(__dirname, 'config.json');
-
-interface ICLIConfig {
-  domain?: string;
-  namespace?: string;
-  config?: string;
-}
+const configFileLocation: string =  'config.json';
 
 const readConfigIfExists = (error: Error, callback: (parsedData: ICLIConfig) => string) => {
   if(existsSync(configFileLocation)) {
@@ -45,7 +39,7 @@ const getEKSConfigLocation = (): string => {
   const rawData = readFileSync(configFileLocation);
   const parsedData: ICLIConfig = JSON.parse(rawData.toString());
   const { config } = parsedData;
-  return config || join(__dirname, '/eks_config.yaml');
+  return config || 'eks_config.yaml';
 }
 
 const writeConfigFile = (data: ICLIConfig): void => {
@@ -55,14 +49,13 @@ const writeConfigFile = (data: ICLIConfig): void => {
     const parsedData: ICLIConfig = JSON.parse(rawData.toString());
     configData = { ...parsedData, ...data };
   }
-  console.log(configData)
   writeFileSync(configFileLocation, JSON.stringify(configData));
 }
+
   export {
-    ICLIConfig,
     configFileLocation,
     writeConfigFile,
     getNamespace,
-    getDomain,
-    getEKSConfigLocation
+    getEKSConfigLocation,
+    getDomain
   };

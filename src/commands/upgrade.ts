@@ -1,6 +1,5 @@
 import { Command, flags } from '@oclif/command';
-import { exec } from 'child_process';
-import { execCallback } from '../helpers/exec';
+import { exec } from '../helpers/exec';
 
 export default class Upgrade extends Command {
   static description = 'Updates helm repo';
@@ -11,6 +10,6 @@ export default class Upgrade extends Command {
   static args = [];
 
   async run() {
-    exec('helm repo update', execCallback);
+    exec('helm repo update');
   }
 }

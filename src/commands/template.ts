@@ -1,14 +1,17 @@
 import { Command, flags } from '@oclif/command';
 import { readFileSync, writeFileSync } from 'fs';
-import { safeDump, safeLoad } from 'js-yaml';
 import { join } from 'path';
 import { getDomain } from '../helpers/cli-config';
+import { writeTemplate } from '../helpers/eks-template';
 
 export default class Template extends Command {
-  static description: string = 'Sets current namespace';
+  static description: string = 'Sets current template';
   static examples: string[] = ['$callrail_eks namespace my-namespace'];
   static flags = {
     help: flags.help({char: 'h'}),
+    domain: flags.string({
+      char: 'd'
+    }),
     branch: flags.string({
       char: 'b',
       default: 'master'
@@ -18,15 +21,7 @@ export default class Template extends Command {
 
   async run() {
     const { flags } = this.parse(Template);
-    const { branch } = flags;
-    const domain = getDomain();
-    const bustCache = Math.floor(Math.random() * Math.floor(1000));
-    const yamlTemplateRaw = readFileSync(join(__dirname,'../../templates/eks-template.yaml'));
-    let yamlString = yamlTemplateRaw.toString()
-    yamlString = yamlString.replace('$CACHEBUST', bustCache.toString());
-    yamlString = yamlString.replace('$CALLRAILTAG', branch);
-    yamlString = yamlString.replace('$BASEDOMAN', domain);
-
-    writeFileSync(join(__dirname, '/eks_config.yaml'), yamlString);
+    const { branch, domain } = flags;
+    writeTemplate(branch, domain);
   }
 }

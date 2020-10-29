@@ -1,8 +1,8 @@
 import { Command, flags } from '@oclif/command';
-import { exec } from 'child_process';
-import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { getNamespace, getEKSConfigLocation } from '../helpers/cli-config';
+import { exec } from '../helpers/exec';
+import { writeTemplate } from '../helpers/eks-template';
 
 export default class Update extends Command {
 
@@ -43,18 +43,8 @@ export default class Update extends Command {
     const namespace = namespaceFlag || getNamespace();
     const eksConfigLocation = config || getEKSConfigLocation()
     const commandString = `helm ssm upgrade ${namespace} ${stack} -f ${config || eksConfigLocation}`;
-
-    exec(commandString, (error, stdout, stderr) => {
-      if (error) {
-          console.log(`error: ${error.message}`);
-          return;
-      }
-      if (stderr) {
-          console.log(`stderr: ${stderr}`);
-          return;
-      }
-      console.log(`stdout: ${stdout}`);
-    });
+    writeTemplate(branch);
+    exec(commandString);
   }
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "callrail_eks",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Jason Buoni @jbuoni",
   "bin": {
     "callrail_eks": "./bin/run"
@@ -10,6 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "@types/colors": "^1.2.1",
     "@types/js-yaml": "^3.12.5",
     "tslib": "^1"
   },

@@ -1,13 +1,7 @@
 import { Command, flags } from '@oclif/command';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import { join } from 'path';
-import {
-  readFileSync,
-  existsSync
-} from 'fs';
-
-const execAsync = promisify(exec);
+import { execAsync } from '../helpers/exec';
+import { getNamespace } from '../helpers/cli-config';
+import { blue, red } from 'colors';
 
 export default class Delete extends Command {
   static description: string = 'Deletes the stack along with the stateful sets associated with it';
@@ -18,46 +12,19 @@ export default class Delete extends Command {
   };
   static args = [];
 
-  fileName: string = join(__dirname, 'config.json');
-
   async run() {
     const { flags } = this.parse(Delete);
     const { namespace: namespaceFlag } = flags;
+    const namespace = namespaceFlag || getNamespace();
 
-    const namespace = namespaceFlag || this.getNamespace();
-
-    await this.runCommand(`kubectl delete statefulset ${namespace}-callrail-postgresql-master`);
-    await this.runCommand(`kubectl delete statefulset ${namespace}-rowdy-postgresql-master`);
-    await this.runCommand(`kubectl delete statefulset ${namespace}-swappy-postgresql-master`);
-    await this.runCommand('kubectl delete pvc --all');
-    await this.runCommand(`helm delete ${namespace}`);
-  }
-
-  private getNamespace(): string {
-    const error: Error = new Error('No namespace specified. Please run the namespace command');
-
-    if(existsSync(this.fileName)) {
-      const rawData = readFileSync(this.fileName);
-      const parsedData = JSON.parse(rawData.toString());
-      const { namespace } = parsedData;
-      if(!namespace) throw error;
-      return namespace;
-
-    } else {
-      throw error;
-    }
-  }
-
-  private commandExec(stdout: string, stderr: string): void {
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-  }
-
-  private async runCommand(commandString: string): Promise<void> {
-    const { stdout, stderr } = await execAsync(commandString);
-    this.commandExec(stdout, stderr)
+    console.log(red('Deleting ESK environment!'));
+    console.log(blue('Deleting helm deploy.'));
+    await execAsync(`helm delete ${namespace}`);
+    console.log(blue('Deleting statefule sets.'));
+    await execAsync(`kubectl delete statefulset ${namespace}-callrail-postgresql-master`);
+    await execAsync(`kubectl delete statefulset ${namespace}-rowdy-postgresql-master`);
+    await execAsync(`kubectl delete statefulset ${namespace}-swappy-postgresql-master`);
+    console.log(blue('Deleting all pvcs.'));
+    await execAsync('kubectl delete pvc --all');
   }
 }

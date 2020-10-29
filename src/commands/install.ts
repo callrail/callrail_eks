@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command';
-import { exec } from 'child_process';
 import { getNamespace, getEKSConfigLocation } from '../helpers/cli-config';
-import { execCallback } from '../helpers/exec';
+import { exec } from '../helpers/exec';
+import { writeTemplate } from '../helpers/eks-template';
 
 export default class Update extends Command {
 
@@ -41,6 +41,7 @@ export default class Update extends Command {
     const namespace = namespaceFlag || getNamespace();
     const eksConfigLocation = config || getEKSConfigLocation();
     const commandString = `helm ssm install ${namespace} ${stack} -f ${config || eksConfigLocation}`;
-    exec(commandString, execCallback);
+    writeTemplate(branch);
+    exec(commandString);
   }
 }

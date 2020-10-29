@@ -1,10 +1,5 @@
 import { Command, flags } from '@oclif/command';
-import { join } from 'path';
-import {
-  writeFileSync,
-  readFileSync,
-  existsSync
-} from 'fs';
+import { writeConfigFile } from '../helpers/cli-config';
 
 export default class ConfigLocation extends Command {
   static description: string = 'Sets location of eks yaml config';
@@ -19,21 +14,9 @@ export default class ConfigLocation extends Command {
     }
   ];
 
-  fileName: string = join(__dirname, 'config.json');
-
   async run() {
     const { args } = this.parse(ConfigLocation);
     const { config } = args;
-    if(existsSync(this.fileName)) {
-      const rawData = readFileSync(this.fileName);
-      const parsedData = JSON.parse(rawData.toString());
-      this.writeConfig(parsedData)
-    } else {
-      this.writeConfig({ config })
-    }
-  }
-
-  private writeConfig(parsedData: any): void {
-    writeFileSync(this.fileName, JSON.stringify(parsedData));
+    writeConfigFile({ config });
   }
 }
