@@ -3,8 +3,10 @@ import { execAsync } from '../helpers/exec';
 import { blue, red } from 'colors';
 
 export default class Setup extends Command {
-  static description: string = 'Sets current namespace';
-  static examples: string[] = ['$callrail_eks namespace my-namespace'];
+  static description: string = 'Installs needed packages to run EKS';
+  static examples: string[] = [
+    '$callrail_eks setup my-github-username'
+  ];
   static flags = {
     help: flags.help({char: 'h'})
   };

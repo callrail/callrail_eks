@@ -162,7 +162,7 @@ _See code: [src/commands/namespace.ts](https://github.com/jbuoni/callrail_eks/bl
 
 ## `callrail_eks setup [GITHUBNAME] [NAMESPACE]`
 
-Sets current namespace
+Installs needed packages to run EKS
 
 ```
 USAGE
@@ -176,14 +176,14 @@ OPTIONS
   -h, --help  show CLI help
 
 EXAMPLE
-  $callrail_eks namespace my-namespace
+  $callrail_eks setup my-github-username
 ```
 
 _See code: [src/commands/setup.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/setup.ts)_
 
 ## `callrail_eks template`
 
-Sets current template
+Generate EKS Yaml template
 
 ```
 USAGE
@@ -194,8 +194,11 @@ OPTIONS
   -d, --domain=domain
   -h, --help           show CLI help
 
-EXAMPLE
-  $callrail_eks namespace my-namespace
+EXAMPLES
+  $callrail_eks template
+  $callrail_eks template -d my-domain
+  $callrail_eks template -b my-branch
+  $callrail_eks template -d my-domain -b my-branch
 ```
 
 _See code: [src/commands/template.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/template.ts)_
