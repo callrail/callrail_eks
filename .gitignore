@@ -106,3 +106,4 @@ dist
 *.DS_STORE
 # local
 config.json
+eks_config.yaml

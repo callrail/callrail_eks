@@ -22,7 +22,7 @@ export default class ConfigLocation extends Command {
   fileName: string = join(__dirname, 'config.json');
 
   async run() {
-    const {args, flags} = this.parse(ConfigLocation);
+    const { args } = this.parse(ConfigLocation);
     const { config } = args;
     if(existsSync(this.fileName)) {
       const rawData = readFileSync(this.fileName);

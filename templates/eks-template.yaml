@@ -30,7 +30,6 @@ rowdy:
   chassis:
     app:
       config:
-        cache_bust: $CACHEBUST
         rails_env: development
         bucket_suffix: stage1
       contexts: {{ssm-path-prefix /configmgmt/}}
@@ -46,7 +45,6 @@ swappy:
   chassis:
     app:
       config:
-        cache_bust: $CACHEBUST
         rails_env: development
         bucket_suffix: stage1
       contexts: {{ssm-path-prefix /configmgmt/}}

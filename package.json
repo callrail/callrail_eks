@@ -1,6 +1,6 @@
 {
   "name": "callrail_eks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Jason Buoni @jbuoni",
   "bin": {
     "callrail_eks": "./bin/run"

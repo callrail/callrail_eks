@@ -21,7 +21,7 @@ export default class Delete extends Command {
   fileName: string = join(__dirname, 'config.json');
 
   async run() {
-    const {args, flags} = this.parse(Command);
+    const { flags } = this.parse(Delete);
     const { namespace: namespaceFlag } = flags;
 
     const namespace = namespaceFlag || this.getNamespace();
