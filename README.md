@@ -19,7 +19,7 @@ $ npm install -g callrail_eks
 $ callrail_eks COMMAND
 running command...
 $ callrail_eks (-v|--version|version)
-callrail_eks/0.0.0 darwin-x64 node-v14.4.0
+callrail_eks/1.0.0 darwin-x64 node-v14.4.0
 $ callrail_eks --help [COMMAND]
 USAGE
   $ callrail_eks COMMAND
@@ -30,9 +30,12 @@ USAGE
 <!-- commands -->
 * [`callrail_eks config-location [CONFIG]`](#callrail_eks-config-location-config)
 * [`callrail_eks delete`](#callrail_eks-delete)
+* [`callrail_eks domain [DOMAIN]`](#callrail_eks-domain-domain)
 * [`callrail_eks help [COMMAND]`](#callrail_eks-help-command)
 * [`callrail_eks install`](#callrail_eks-install)
 * [`callrail_eks namespace [NAMESPACE]`](#callrail_eks-namespace-namespace)
+* [`callrail_eks setup [GITHUBNAME] [NAMESPACE]`](#callrail_eks-setup-githubname-namespace)
+* [`callrail_eks template`](#callrail_eks-template)
 * [`callrail_eks token`](#callrail_eks-token)
 * [`callrail_eks update`](#callrail_eks-update)
 * [`callrail_eks upgrade`](#callrail_eks-upgrade)
@@ -55,7 +58,7 @@ EXAMPLE
   $callrail_eks config-location my-config
 ```
 
-_See code: [src/commands/config-location.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/config-location.ts)_
+_See code: [src/commands/config-location.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/config-location.ts)_
 
 ## `callrail_eks delete`
 
@@ -73,7 +76,27 @@ EXAMPLE
   $callrail_eks delete
 ```
 
-_See code: [src/commands/delete.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/delete.ts)_
+_See code: [src/commands/delete.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/delete.ts)_
+
+## `callrail_eks domain [DOMAIN]`
+
+Sets current domain
+
+```
+USAGE
+  $ callrail_eks domain [DOMAIN]
+
+ARGUMENTS
+  DOMAIN  Domain associated with the eks environment. Just include the base, as the rest will be appended
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks domain my-domain
+```
+
+_See code: [src/commands/domain.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/domain.ts)_
 
 ## `callrail_eks help [COMMAND]`
 
@@ -115,7 +138,7 @@ EXAMPLES
   $ callrail_eks install -c "~/my-custom-yaml.yml"
 ```
 
-_See code: [src/commands/install.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/install.ts)_
+_See code: [src/commands/install.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/install.ts)_
 
 ## `callrail_eks namespace [NAMESPACE]`
 
@@ -135,7 +158,47 @@ EXAMPLE
   $callrail_eks namespace my-namespace
 ```
 
-_See code: [src/commands/namespace.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/namespace.ts)_
+_See code: [src/commands/namespace.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/namespace.ts)_
+
+## `callrail_eks setup [GITHUBNAME] [NAMESPACE]`
+
+Sets current namespace
+
+```
+USAGE
+  $ callrail_eks setup [GITHUBNAME] [NAMESPACE]
+
+ARGUMENTS
+  GITHUBNAME  Github user name
+  NAMESPACE   Namespace to use when talking to Kubernetes
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $callrail_eks namespace my-namespace
+```
+
+_See code: [src/commands/setup.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/setup.ts)_
+
+## `callrail_eks template`
+
+Sets current template
+
+```
+USAGE
+  $ callrail_eks template
+
+OPTIONS
+  -b, --branch=branch  [default: master]
+  -d, --domain=domain
+  -h, --help           show CLI help
+
+EXAMPLE
+  $callrail_eks namespace my-namespace
+```
+
+_See code: [src/commands/template.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/template.ts)_
 
 ## `callrail_eks token`
 
@@ -152,7 +215,7 @@ EXAMPLE
   $callrail_eks token
 ```
 
-_See code: [src/commands/token.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/token.ts)_
+_See code: [src/commands/token.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/token.ts)_
 
 ## `callrail_eks update`
 
@@ -177,7 +240,7 @@ EXAMPLES
   $ callrail_eks update -c "~/my-custom-yaml.yml"
 ```
 
-_See code: [src/commands/update.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/update.ts)_
+_See code: [src/commands/update.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/update.ts)_
 
 ## `callrail_eks upgrade`
 
@@ -194,5 +257,5 @@ EXAMPLE
   $callrail_eks upgrade
 ```
 
-_See code: [src/commands/upgrade.ts](https://github.com/jbuoni/callrail_eks/blob/v0.0.0/src/commands/upgrade.ts)_
+_See code: [src/commands/upgrade.ts](https://github.com/jbuoni/callrail_eks/blob/v1.0.0/src/commands/upgrade.ts)_
 <!-- commandsstop -->
